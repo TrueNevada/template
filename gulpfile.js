@@ -14,21 +14,19 @@ gulp.task('sass', function () {
     .pipe(sass())
     .pipe(autoprefixer())
     .pipe(sourcemap.write('.'))
-    .pipe(gulp.dest('build/css/'))
-    .pipe(server.stream());
+    .pipe(gulp.dest('build/css'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('html', function () {
   return gulp.src('*.html')
     .pipe(gulp.dest('build/'))
-    .pipe(server.stream());
+    .pipe(browserSync.stream());
 });
 
 gulp.task('serve', function () {
   browserSync.init({
-    server: {
-      baseDir: './'
-    }
+    server: 'build/'
   });
   gulp.watch('sass/**/*.scss', gulp.series('sass'));
   gulp.watch('*.html', gulp.series('html'));
