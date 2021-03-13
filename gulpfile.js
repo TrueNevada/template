@@ -6,6 +6,11 @@ const plumber = require('gulp-plumber');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const sourcemap = require('gulp-sourcemaps');
+const del = require('del');
+
+gulp.task('clean', function () {
+  return del('build');
+});
 
 gulp.task('sass', function () {
   return gulp.src('sass/style.scss')
@@ -40,4 +45,4 @@ Browser Sync - это веб сервер, построенный на базе 
 он отработал так, как и должен - отдал ошибку 404.
 */
 
-gulp.task("start", gulp.series("sass", "html", "serve"))
+gulp.task("start", gulp.series("clean","sass", "html", "serve"));
